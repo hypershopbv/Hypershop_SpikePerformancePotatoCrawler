@@ -6,9 +6,8 @@ namespace Hypershop\SpikePerformancePotatoCrawler\Plugin\Hypershop\SpikePerforma
 use Exception;
 use Hypershop\SpikePerformance\Cron\ReindexFlushCache as SpikePerformanceReindexFlushCache;
 use Hypershop\SpikePerformancePotatoCrawler\Helper\Config;
-use Magento\Framework\Console\Cli;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Output\NullOutput;
+use Potato\Crawler\Model\Cron\Queue;
+use Potato\Crawler\Model\Cron\Warmer;
 
 class ReindexFlushCache
 {
@@ -16,14 +15,28 @@ class ReindexFlushCache
      * @var Config
      */
     private $spikePerformanceConfig;
+    /**
+     * @var Warmer
+     */
+    private $warmer;
+    /**
+     * @var Queue
+     */
+    private $queue;
 
     /**
      * @param Config $spikePerformanceConfig
+     * @param Warmer $warmer
+     * @param Queue $queue
      */
     public function __construct(
-        Config $spikePerformanceConfig
+        Config $spikePerformanceConfig,
+        Warmer $warmer,
+        Queue $queue
     ) {
         $this->spikePerformanceConfig = $spikePerformanceConfig;
+        $this->warmer = $warmer;
+        $this->queue = $queue;
     }
 
     /**
@@ -55,28 +68,16 @@ class ReindexFlushCache
      */
     private function queue()
     {
-        $application = new Cli('Magento CLI');
-        $input = new ArrayInput(['command' => 'po_crawler:queue']);
-        $output = new NullOutput();
-
-        try {
-            $application->run($input, $output);
-        } catch (Exception $e) {}
+        $this->queue->process();
     }
 
     /**
-     * Start PO Crawler Wamer
+     * Start PO Crawler Warmer
      *
      * @throws Exception
      */
     private function warm()
     {
-        $application = new Cli('Magento CLI');
-        $input = new ArrayInput(['command' => 'po_crawler:warmer']);
-        $output = new NullOutput();
-
-        try {
-            $application->run($input, $output);
-        } catch (Exception $e) {}
+        $this->warmer->process();
     }
 }
