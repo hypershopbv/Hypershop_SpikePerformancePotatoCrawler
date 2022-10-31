@@ -1,0 +1,22 @@
+{
+    "name": "hypershop/module-spike-performance-potato-crawler",
+    "version": "100.4.5",
+    "type": "magento2-module",
+    "description": "Magento 2 module to add potato crawler functionality to the Spike Performance module",
+    "homepage": "https://github.com/hypershopbv/Hypershop_SpikePerformancePotatoCrawler",
+    "license": [
+        "OSL-3.0"
+    ],
+    "require": {
+        "hypershop/module-spike-performance": "*",
+        "potato/module-crawler": "1.0.5"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Hypershop\\SpikePerformancePotatoCrawler\\": ""
+        }
+    }
+}
