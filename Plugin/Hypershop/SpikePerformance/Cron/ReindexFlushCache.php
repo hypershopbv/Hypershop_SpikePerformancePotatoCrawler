@@ -5,12 +5,24 @@ namespace Hypershop\SpikePerformancePotatoCrawler\Plugin\Hypershop\SpikePerforma
 
 use Exception;
 use Hypershop\SpikePerformance\Cron\ReindexFlushCache as SpikePerformanceReindexFlushCache;
+use Hypershop\SpikePerformancePotatoCrawler\Helper\Config;
 use Magento\Framework\Console\Cli;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 
 class ReindexFlushCache
 {
+    /**
+     * @var Config
+     */
+    private $spikePerformanceConfig;
+
+    public function __construct(
+        Config $spikePerformanceConfig
+    ) {
+        $this->spikePerformanceConfig = $spikePerformanceConfig;
+    }
+
     /**
      * @param SpikePerformanceReindexFlushCache $subject
      * @param $result
@@ -21,6 +33,12 @@ class ReindexFlushCache
         SpikePerformanceReindexFlushCache $subject,
         $result
     ) {
+        if (!$this->spikePerformanceConfig->getIsPotatoCrawlerAfterCronEnabled()) {
+            return $result;
+        }
+
+        die('hier');
+
         // Queue pages
         $this->queue();
         // Run warmer

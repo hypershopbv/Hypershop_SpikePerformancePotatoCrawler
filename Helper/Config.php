@@ -35,6 +35,6 @@ class Config extends AbstractHelper
      */
     public function getIsPotatoCrawlerAfterCronEnabled(): bool
     {
-        return $this->spikePerformanceHelper->getConfigValueByKey('potato_crawler_after_cron');
+        return (bool) $this->spikePerformanceHelper->getConfigValueByKey('potato_crawler_after_cron');
     }
 }
