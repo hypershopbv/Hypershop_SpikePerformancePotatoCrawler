@@ -17,6 +17,9 @@ class ReindexFlushCache
      */
     private $spikePerformanceConfig;
 
+    /**
+     * @param Config $spikePerformanceConfig
+     */
     public function __construct(
         Config $spikePerformanceConfig
     ) {
@@ -36,8 +39,6 @@ class ReindexFlushCache
         if (!$this->spikePerformanceConfig->getIsPotatoCrawlerAfterCronEnabled()) {
             return $result;
         }
-
-        die('hier');
 
         // Queue pages
         $this->queue();
