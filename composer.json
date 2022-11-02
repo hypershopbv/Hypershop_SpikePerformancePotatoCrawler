@@ -8,8 +8,7 @@
         "OSL-3.0"
     ],
     "require": {
-        "hypershop/module-spike-performance": "*",
-        "potato/module-crawler": "1.0.5"
+        "hypershop/module-spike-performance": "*"
     },
     "autoload": {
         "files": [
