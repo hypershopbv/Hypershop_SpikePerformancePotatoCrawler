@@ -3,7 +3,7 @@
     <system>
         <section id="hypershop_spikeperformance">
             <group id="settings">
-                <field id="potato_crawler_after_cron" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="potato_crawler_after_cron" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Run Potato Crawler after cronjob is done</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>Runs the Potato Crawler after the cronjob is done.</comment>
